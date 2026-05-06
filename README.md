@@ -30,8 +30,14 @@ A modern weather web app with real-time API data, city search, animated UI, and 
 
 ## 📸 Preview
 
-(Add screenshot here later)
+### 🖥️ Main UI
+![Weather X Main Screen](assets/Screenshot%20(317).png)
 
+### 🌍 City Image View
+![Weather X City View](assets/Screenshot%20(318).png)
+
+### 🗺️ Map View
+![Weather X Map View](assets/Screenshot%20(319).png)
 ---
 
 ## 📌 How to Run Locally
