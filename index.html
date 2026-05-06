@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+<div class="container">
+  <div class="app-title"><i class="fas fa-bolt"></i>WEATHER X </div>
+
+  <!-- FLIP WRAPPER (ONLY ADDITION) -->
+  <div class="weather-flip" id="weatherFlip">
+
+    <div class="weather">
+
+      <!-- LEFT SIDE -->
+      <div class="weather-left">
+        <div class="temp">-- °C</div>
+
+        <div class="weather_condition">
+          <img src="" alt="" />
+          <span>Condition</span>
+        </div>
+
+        <div class="time_location">
+          <p class="city-name-main" id="cityLink">Search</p>
+
+          <div class="time-block">
+            <div class="local-time">Local Time:</div>
+            <div class="pacific-time">Pacific Time:</div>
+            <div class="gmt-time">GMT:</div>
+            <div class="date">Date:</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <div class="city-card">
+        <div class="card-inner">
+
+          <div class="card-front">
+            Search a City
+          </div>
+
+          <div class="card-back">
+            <img src="" class="city-image" />
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MAP SIDE (ONLY ADDITION) -->
+    <div class="weather-map">
+      <button class="map-back-btn" id="mapBackBtn">← Back</button>
+      <iframe class="map-frame"></iframe>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <form class="searchForm">
+    <input type="text" placeholder="Search location" class="searchField"/>
+    <button type="submit" class="searchBtn">🔍</button>
+  </form>
+
+  <div class="suggestions"></div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

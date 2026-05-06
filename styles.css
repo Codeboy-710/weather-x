@@ -1,0 +1,403 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+}
+
+/* PAGE BACKGROUND */
+body {
+  background: linear-gradient(135deg, #0f0f2e 0%, #1a0f3f 25%, #2d1b4e 50%, #1a0f3f 75%, #0f0f2e 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(0,198,255,0.1), transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(0,114,255,0.1), transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* CONTAINER */
+.container {
+  gap: 60px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* TITLE */
+.app-title {
+  margin-top: 15px;
+  font-size: 3.2rem;
+  padding: 20px 40px;
+  border: 5px solid #0ffffbbd;
+  border-radius: 40px;
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: 3px;
+  background: linear-gradient(270deg, #00c6ff, #0072ff, #00ffcc, #ffcc00);
+  background-size: 800% 800%;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 6s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.time_location {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* space between city name and time block */
+}
+
+
+/* =========================
+   FLIP WRAPPER
+========================= */
+.weather-flip {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  perspective: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+}
+
+/* COMMON CARD BASE */
+.weather,
+.weather-map {
+  width: 900px;
+  max-width: 90%;
+  height: 350px;
+  position: absolute;
+  border-radius: 25px;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+/* FRONT CARD */
+.weather {
+  display: flex;
+  gap: 40px;
+  padding: 30px 40px;
+  background: url("./Featured-Image-Live-Weather-Wallpapers-Android.jpg") center/cover;
+  color: white;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  align-items: center;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.weather::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  border-radius: 25px;
+  z-index: 0;
+}
+
+.weather > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* BACK MAP */
+.weather-map {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateY(180deg);
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.map-back-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  left: auto;
+  z-index: 10;
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: none;
+
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+
+.map-back-btn:hover {
+  background: rgba(0, 198, 255, 0.8);
+  transform: scale(1.05);
+}
+
+.map-back-btn:active {
+  transform: scale(0.95);
+}
+
+.map-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* FLIP STATE */
+.weather-flip.flipped .weather {
+  transform: rotateY(180deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.weather-flip.flipped .weather-map {
+  transform: translate(-50%, -50%) rotateY(0deg);
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 3;
+}
+
+/* LEFT SECTION */
+.weather-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.temp {
+  font-size: 4rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #fff, #a8e6ff);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.weather_condition {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.weather_condition img {
+  width: 60px;
+}
+
+/* CITY TEXT */
+.city-name-main {
+  font-size: 2rem;
+  font-weight: 800;
+  cursor: pointer;
+  background: linear-gradient(90deg, #00c6ff, #0072ff, #00ffcc);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.city-name-main:hover {
+   background: linear-gradient(90deg, #00ffcc, #0072ff, #00c6ff, #ffcc00);
+  background-size: 300% 300%;
+  animation: cityGlow 2s ease infinite;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  transform: scale(1.08);
+  letter-spacing: 2px;
+}
+
+/* =========================
+   CITY CARD (FIXED STABLE FLIP)
+========================= */
+.city-card {
+  width: 240px;
+  height: 260px;
+  flex-shrink: 0;
+  perspective: 1200px;
+  position: relative;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* smooth multi-rotation effect */
+.city-card.spin .card-inner {
+  transform: rotateY(1620deg);
+}
+
+/* CARD FACES */
+.card-front,
+.card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* FRONT */
+.card-front {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  z-index: 2;
+}
+
+/* BACK */
+.card-back {
+  transform: rotateY(180deg)translateZ(1px);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.city-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* FOOTER */
+footer {
+  height: 10rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.searchForm {
+  display: flex;
+  gap: 10px;
+  width: 90%;
+  max-width: 500px;
+  height: 60px;
+  position: relative;
+  max-width: 500px;
+   border-radius: 50px;
+  overflow: hidden;
+  background: #eaeaea;
+  border: 3px solid #0d7cc5;
+}
+
+.searchField {
+  width: 100%;
+  flex: 1;
+  padding: 15px 60px 15px 25px;
+  border: 2px solid #00c6ff;
+  border-radius: 100px;
+  text-align: center;
+  outline: none;
+  font-size: 20px;
+  background: rgba(255,255,255,0.9);
+}
+
+.searchBtn {
+  position: absolute;
+  right: 8px;
+  top: 4px;
+  width: 45px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: #0072ff;
+   font-size: 1.2rem;
+  padding: 0 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchBtn:hover {
+  background: #a7af16;
+}
+
+/* AUTOCOMPLETE */
+.suggestions {
+  position: fixed;
+  bottom: 90px;
+  width: 90%;
+  max-width: 500px;
+  background: rgba(0,0,0,0.85);
+  border-radius: 15px;
+  display: none;
+  flex-direction: column;
+}
+
+.suggestions.show {
+  display: flex;
+}
+
+.suggestion-item {
+  padding: 12px;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  margin-right: 8px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: white;
+  vertical-align: middle;
+}
+
+/* Individual badge colors */
+.badge.local {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+}
+
+.badge.pacific {
+  background: linear-gradient(135deg, #ff6a00, #ffcc00);
+}
+
+.badge.gmt {
+  background: linear-gradient(135deg, #8e2de2, #4a00e0);
+}
+.badge.date {
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+}
